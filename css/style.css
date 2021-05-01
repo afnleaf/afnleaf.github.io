@@ -1,0 +1,119 @@
+/*
+  CSS for index, hyperion and asteria
+*/
+
+body {
+  background: #252a32;
+ 
+  /*8393a3*/
+  /* background-image:url('bg/background.jpg'); */
+  color: #27d0ff;
+  /*  */
+  
+  font-family: "Deja Vu", monospace;
+  font-size: 32pt;
+  font-weight: normal;
+  text-align: center;
+
+}
+
+main {
+  /* positioning */
+
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  /* auto center
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  */
+
+  /* text */
+  letter-spacing: 1px;
+  /* border: 3px solid #73AD21; */
+}
+
+h1 {
+  font-size: 48pt;
+  font-weight: normal;
+  line-height: 0;
+}
+
+h2 {
+  font-size: 42pt;
+  font-weight: normal;
+  line-height: 0.5;
+}
+
+a {
+  color: #f8b284 ;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3db5e1;
+}
+
+.links {
+  text-align: left;
+  color: #007a31;
+}
+/*#407c9b*/
+
+
+
+
+/*
+OLD
+body {
+  background: #252a32;
+  font-size: 16pt;
+  font-family: "Deja Vu", monospace;
+  text-align: center;
+  line-height: 0.6;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+h2 {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+h3 {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
+p {
+  color: #ffffff;
+}
+
+a {
+  color: #888888;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #fff000;
+}
+
+*/
+
+
+
+
+
+
+
+
+

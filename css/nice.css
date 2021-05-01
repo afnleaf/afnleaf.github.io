@@ -1,0 +1,62 @@
+@font-face {
+font-family: "Deja Vu", monospace;
+}
+
+/*
+bg #252a32
+color #3db5e1 
+*/
+body {
+background: #252a32;
+background-image:url('background.jpg');
+color: #ffffff  ;
+font-family: "Deja Vu", monospace;
+font-size: 32pt;
+}
+
+/* a #f8b284 */
+a {
+color: #bf13ae ;
+text-decoration: none;
+}
+
+/*hover #3db5e1 */
+a:hover {
+color: #91678d
+}
+
+h1 {
+font-family: "Deja Vu", monospace;
+font-size: 48pt;
+font-weight: normal;
+/*
+margin-top: -300px;
+margin-bottom: 24px;
+*/
+}
+
+/*links #407c9b */
+.links {
+color: #FFFFFF  ;
+}
+
+.saves {
+color: #FFFFFF  ;
+font-size: 20pt;
+}
+
+#body {
+margin: auto;
+margin-top: 5%;
+width: 50%;
+
+/*
+max-width: 800px;
+max-height: 1px;
+position: center;
+top: 65%;
+left: 30%;
+margin-top: -150px;
+margin-left: 10px;
+*/
+}
