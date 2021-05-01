@@ -3,11 +3,11 @@
 */
 
 body {
-  background: #252a32;
+  background: #ffffff;
  
   /*8393a3*/
   /* background-image:url('bg/background.jpg'); */
-  color: #27d0ff;
+  color: #333333;
   /*  */
   
   font-family: "Deja Vu", monospace;
@@ -64,50 +64,6 @@ a:hover {
   text-align: left;
   color: #007a31;
 }
-/*#407c9b*/
-
-
-
-
-/*
-OLD
-body {
-  background: #252a32;
-  font-size: 16pt;
-  font-family: "Deja Vu", monospace;
-  text-align: center;
-  line-height: 0.6;
-}
-
-h1 {
-  color: #ffffff;
-}
-
-h2 {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-h3 {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-
-p {
-  color: #ffffff;
-}
-
-a {
-  color: #888888;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #fff000;
-}
-
-*/
 
 
 
