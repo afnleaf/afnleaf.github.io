@@ -62,7 +62,13 @@ a:hover {
 
 .links {
   text-align: left;
-  color: #007a31;
+  color: #000000;
+}
+
+p {
+  text-align: left;
+  color: #333333;
+  font-size: 30;
 }
 
 
