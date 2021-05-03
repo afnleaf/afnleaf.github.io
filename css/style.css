@@ -51,6 +51,11 @@ h2 {
   line-height: 0.5;
 }
 
+h3 {
+  font-size: 24pt;
+  font-weight: bold;
+}
+
 a {
   color: #f8b284 ;
   text-decoration: none;
@@ -66,7 +71,7 @@ a:hover {
 }
 
 p {
-  text-align: left;
+  text-align: center;
   color: #333333;
   font-size: 16pt
 }
