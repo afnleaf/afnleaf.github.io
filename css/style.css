@@ -46,9 +46,10 @@ h1 {
 }
 
 h2 {
-  font-size: 42pt;
+  font-size: 32pt;
   font-weight: normal;
   line-height: 0.5;
+  margin: 0 0 1px 0;
 }
 
 h3 {
