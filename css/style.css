@@ -2,15 +2,17 @@
   CSS for index, hyperion and asteria
 */
 
+html {
+	font-family: sans-serif; /* 1 */
+	-ms-text-size-adjust: 100%; /* 2 */
+	-webkit-text-size-adjust: 100%; /* 2 */
+}
+
 body {
   background: #ffffff;
- 
   /*8393a3*/
   /* background-image:url('bg/background.jpg'); */
   color: #333333;
-  /*  */
-  
-  font-family: "Deja Vu", monospace;
   font-size: 32pt;
   font-weight: normal;
   text-align: center;
