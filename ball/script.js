@@ -42,7 +42,7 @@ function addGoBackEventListener() {
 // display single team by passed index
 async function displayTeam(index) {
     // get url of json for team from index
-    const url = `/data/teamData${index}.json`
+    const url = `/ball/data/teamData${index}.json`
     const teamInfo = document.getElementById('teamInfo');
     // clear old teaminfo
     teamInfo.innerHTML = "";
