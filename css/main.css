@@ -1141,7 +1141,7 @@ h3 strong,
 
 	#sidebar {
 		width: 471px;
-		padding: 244px 20px 20px 91px;
+		padding: 40px 20px 20px 91px;
 	}
 
 	#main {
@@ -1154,7 +1154,7 @@ h3 strong,
 	}
 
 	.sidebar-info-list li {
-		margin: 0 0 36px;
+		margin: 0 0 12px;
 	}
 
 	.sidebar-info-list li:first-child .dt {
