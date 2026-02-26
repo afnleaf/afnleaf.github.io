@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <body>
+<head>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        place-items: center;
+        place-content: center;
+    }
+
+    main {
+        margin: 1rem;
+        
+    }
+
+    footer {
+        margin: 1rem;
+    }
+</style>
+</head>
+<body>
+    <main>
         <p>empty world</p>
-        <div>
-            <span><a href="/sphere">/sphere</a></span>
-        </div>
-        <div>
-            <span><a href="/planet">/planet</a></span>
-        </div>
-        <div>
-            <span><a href="/pokepack">/pokepack</a></span>
-        </div>
-        <div>
-            <span><a href="/mecha">/mecha</a></span>
-        </div>
-    </body>
+        <div><span><a href="/sphere">/sphere</a></span></div>
+        <div><span><a href="/planet">/planet</a></span></div>
+        <div><span><a href="/pokepack">/pokepack</a></span></div>
+        <div><span><a href="/mecha">/mecha</a></span></div>
+    </main>
+    <footer class="footer">
+        <span><a href="https://github.com/afnleaf">/github</a></span>
+    </footer>
+<script>
+    document.querySelectorAll('main a').forEach(link => {
+        const indicator = document.createElement('span');
+        indicator.textContent = ' ...';
+        link.appendChild(indicator);
+        fetch(link.href, { priority: 'low' })
+            .then(() => { indicator.textContent = ' ✓'; })
+            .catch(() => { indicator.textContent = ' ✗'; });
+    });
+</script>
+</body>
 </html>
