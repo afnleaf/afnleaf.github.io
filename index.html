@@ -32,7 +32,17 @@
     <footer class="footer">
         <span><a href="https://github.com/afnleaf">/github</a></span>
     </footer>
-<script>
+<script type="speculationrules">
+{
+    "prerender": [
+        {
+            "where": { "selector_matches": "main a" },
+            "eagerness": "moderate"
+        }
+    ]
+}
+</script>
+<!--<script>
     document.querySelectorAll('main a').forEach(link => {
         const indicator = document.createElement('span');
         indicator.textContent = ' ...';
@@ -41,6 +51,6 @@
             .then(() => { indicator.textContent = ' ✓'; })
             .catch(() => { indicator.textContent = ' ✗'; });
     });
-</script>
+</script>-->
 </body>
 </html>
