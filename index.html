@@ -42,15 +42,18 @@
     ]
 }
 </script>
-<!--<script>
+<script>
     document.querySelectorAll('main a').forEach(link => {
         const indicator = document.createElement('span');
-        indicator.textContent = ' ...';
         link.appendChild(indicator);
-        fetch(link.href, { priority: 'low' })
-            .then(() => { indicator.textContent = ' ✓'; })
-            .catch(() => { indicator.textContent = ' ✗'; });
+        link.addEventListener('pointerenter', () => {
+            if (indicator.dataset.done) return;
+            indicator.textContent = ' ...';
+            fetch(link.href, { priority: 'low' })
+                .then(() => { indicator.textContent = ' ✓'; indicator.dataset.done = '1'; })
+                .catch(() => { indicator.textContent = ' ✗'; indicator.dataset.done = '1'; });
+        }, { once: true });
     });
-</script>-->
+</script>
 </body>
 </html>
