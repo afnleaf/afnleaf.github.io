@@ -11,141 +11,263 @@
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { overflow: hidden; background: #1a1a2e; font-family: 'Segoe UI', monospace; }
+body { overflow: hidden; background: #0f0f1a; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
 #container { width: 100vw; height: 100vh; }
 canvas { display: block; }
 
+/* ── HUD ── */
 #hud {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
   z-index: 10;
 }
 
+/* ── Top Bar ── */
+#top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 0;
+  gap: 6px;
+}
+
 #info {
-  color: #aaa;
-  font-size: 13px;
-  padding: 10px;
-  text-align: center;
-  opacity: 0.6;
+  color: rgba(255,255,255,0.2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 #turn-indicator {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  padding: 4px;
 }
 
 #status-msg {
-  color: #ff6b6b;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   text-align: center;
-  padding: 2px;
   min-height: 20px;
+  color: #ff6b6b;
 }
 
 #check-spinner {
-  color: #aaa;
-  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
   text-align: center;
-  padding: 4px;
+  width: 200px;
 }
 
 .spinner {
   display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255,255,255,0.2);
+  width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,0.12);
   border-top-color: #00FFAA;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
   vertical-align: middle;
+  margin-right: 4px;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* ── Side Panel ── */
+#side-panel {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 #rotation-controls {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  pointer-events: auto;
+  gap: 16px;
+  background: rgba(20, 20, 40, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 20px;
+  width: 200px;
 }
 
+#panel-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+
+/* ── Axis Toggle ── */
 #axis-buttons {
+  display: flex;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.axis-btn {
+  flex: 1;
+  background: transparent;
+  color: rgba(255,255,255,0.35);
+  border: none;
+  padding: 7px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.axis-btn:hover {
+  color: rgba(255,255,255,0.6);
+}
+
+.axis-btn.active {
+  background: rgba(100, 149, 237, 0.35);
+  color: #fff;
+  box-shadow: 0 1px 8px rgba(100, 149, 237, 0.25);
+}
+
+/* ── Layer ── */
+#layer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#layer-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+#layer-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.08);
+  outline: none;
+}
+
+#layer-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #6495ED;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(100, 149, 237, 0.2);
+  transition: box-shadow 0.15s;
+}
+#layer-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(100, 149, 237, 0.3);
+}
+#layer-slider::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #6495ED;
+  cursor: pointer;
+  border: none;
+}
+
+#layer-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+#layer-ticks span {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.15);
+  width: 14px;
+  text-align: center;
+}
+
+/* ── Rotate Buttons ── */
+#rotate-buttons {
   display: flex;
   gap: 6px;
 }
 
-.axis-btn {
-  background: rgba(255,255,255,0.1);
-  color: #ccc;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 6px 14px;
-  cursor: pointer;
-  font-size: 13px;
-  border-radius: 4px;
-  transition: all 0.15s;
-}
-
-.axis-btn:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-.axis-btn.active {
-  background: rgba(100,149,237,0.4);
-  border-color: cornflowerblue;
-  color: #fff;
-}
-
-#layer-slider-wrap {
+#rotate-cw, #rotate-ccw {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #ccc;
-  font-size: 13px;
-}
-
-#layer-slider {
-  width: 180px;
-  accent-color: cornflowerblue;
-}
-
-#rotate-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-#rotate-cw, #rotate-ccw {
-  background: rgba(255,255,255,0.1);
-  color: #ccc;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 8px 18px;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 0;
   cursor: pointer;
-  font-size: 13px;
-  border-radius: 4px;
-  transition: all 0.15s;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.12s ease;
 }
+
+.rot-icon { font-size: 16px; }
 
 #rotate-cw:hover, #rotate-ccw:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(100, 149, 237, 0.2);
+  border-color: rgba(100, 149, 237, 0.3);
   color: #fff;
+}
+
+#rotate-cw:active, #rotate-ccw:active {
+  transform: scale(0.96);
 }
 
 #rotate-cw:disabled, #rotate-ccw:disabled {
-  opacity: 0.3;
+  opacity: 0.2;
   cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Re-center ── */
+#recenter-btn {
+  width: 200px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.12s ease;
+}
+#recenter-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+}
+#recenter-btn:active { transform: scale(0.96); }
+
+/* ── Help ── */
+#help-text {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 8px;
 }
 
 </style>
@@ -2206,45 +2328,29 @@ RC.COLORS = {
     this.cubeModel = cubeModel;
     this.turnEl = document.getElementById('turn-indicator');
     this.statusEl = document.getElementById('status-msg');
-    this.spinnerEl = document.getElementById('check-spinner');
     this.update();
   }
 
   HUD.prototype.update = function() {
     var gs = this.gameState;
-    var self = this;
     var playerName = gs.currentPlayer === RC.PLAYER.WHITE ? 'White' : 'Black';
     this.turnEl.textContent = playerName + ' to play \u2014 Turn ' + gs.turnNumber;
     this.turnEl.style.color = gs.currentPlayer === RC.PLAYER.WHITE ? '#f0f0f0' : '#888';
 
     if (gs.phase === 'gameover') {
       this.statusEl.textContent = 'Game Over';
-      this.spinnerEl.style.display = 'none';
-      return;
+    } else if (RC.ChessRules.isInCheck(this.cubeModel, gs.currentPlayer)) {
+      this.statusEl.textContent = 'CHECK! Rotation blocked';
+      this.statusEl.style.color = '#ff6b6b';
+    } else {
+      this.statusEl.textContent = '';
     }
 
-    // Show spinner, defer check computation to next frame so spinner renders
-    this.statusEl.textContent = '';
-    this.spinnerEl.style.display = 'block';
-
-    setTimeout(function() {
-      var inCheck = RC.ChessRules.isInCheck(self.cubeModel, gs.currentPlayer);
-      self.spinnerEl.style.display = 'none';
-
-      if (inCheck) {
-        self.statusEl.textContent = 'CHECK! Must move a piece (rotation blocked)';
-        self.statusEl.style.color = '#ff6b6b';
-      } else {
-        self.statusEl.textContent = '';
-      }
-
-      // Update rotation button state
-      var canRotate = gs.canRotate();
-      var cwBtn = document.getElementById('rotate-cw');
-      var ccwBtn = document.getElementById('rotate-ccw');
-      if (cwBtn) cwBtn.disabled = !canRotate;
-      if (ccwBtn) ccwBtn.disabled = !canRotate;
-    }, 0);
+    var canRotate = gs.canRotate();
+    var cwBtn = document.getElementById('rotate-cw');
+    var ccwBtn = document.getElementById('rotate-ccw');
+    if (cwBtn) cwBtn.disabled = !canRotate;
+    if (ccwBtn) ccwBtn.disabled = !canRotate;
   };
 
   RC.HUD = HUD;
@@ -2384,6 +2490,25 @@ RC.COLORS = {
     updateHighlights();
   };
 
+  // Re-center camera
+  function recenterCamera() {
+    var cam = sceneSetup.camera;
+    var ctrl = sceneSetup.controls;
+    cam.position.set(-10, 12, -10);
+    cam.up.set(0, 1, 0);
+    ctrl.target.set(0, 0, 0);
+    ctrl.reset();
+    cam.position.set(-10, 12, -10);
+    cam.lookAt(0, 0, 0);
+  }
+
+  document.getElementById('recenter-btn').addEventListener('click', recenterCamera);
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'r' || e.key === 'R') {
+      if (e.target.tagName !== 'INPUT') recenterCamera();
+    }
+  });
+
   // Render loop
   function animate() {
     requestAnimationFrame(animate);
@@ -2415,23 +2540,35 @@ RC.COLORS = {
 
 <div id="container"></div>
 <div id="hud">
-  <div id="info">Rubix Chess</div>
-  <div id="turn-indicator"></div>
-  <div id="status-msg"></div>
-  <div id="check-spinner" style="display:none"><span class="spinner"></span> Checking...</div>
-  <div id="rotation-controls">
-    <div id="axis-buttons">
-      <button class="axis-btn" data-axis="x">X Axis</button>
-      <button class="axis-btn active" data-axis="y">Y Axis</button>
-      <button class="axis-btn" data-axis="z">Z Axis</button>
+  <div id="top-bar">
+    <div id="info">Rubix Chess</div>
+    <div id="turn-indicator"></div>
+    <div id="status-msg"></div>
+  </div>
+  <div id="side-panel">
+    <div id="rotation-controls">
+      <div id="panel-label">Rotate Layer</div>
+      <div id="axis-buttons">
+        <button class="axis-btn" data-axis="x">X</button>
+        <button class="axis-btn active" data-axis="y">Y</button>
+        <button class="axis-btn" data-axis="z">Z</button>
+      </div>
+      <div id="layer-section">
+        <div id="layer-label">Layer 0</div>
+        <input type="range" id="layer-slider" min="0" max="7" value="0" step="1">
+        <div id="layer-ticks">
+          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+        </div>
+      </div>
+      <div id="rotate-buttons">
+        <button id="rotate-ccw"><span class="rot-icon">&#x21BA;</span> CCW</button>
+        <button id="rotate-cw">CW <span class="rot-icon">&#x21BB;</span></button>
+      </div>
     </div>
-    <div id="layer-slider-wrap">
-      <input type="range" id="layer-slider" min="0" max="7" value="0" step="1">
-      <span id="layer-label">Layer 0</span>
-    </div>
-    <div id="rotate-buttons">
-      <button id="rotate-cw">Rotate CW</button>
-      <button id="rotate-ccw">Rotate CCW</button>
+    <button id="recenter-btn">[R] Re-Center</button>
+    <div id="help-text">
+      Drag to orbit &middot; Scroll to zoom<br>
+      Click a piece to move it
     </div>
   </div>
 </div>
